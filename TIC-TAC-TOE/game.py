@@ -1,13 +1,19 @@
-from player import HumanPlayer, RandomComputerPlayer
+import math
+import time
+from player import HumanPlayer, RandomComputerPlayer, GeniusComputerPlayer
 
 class TicTacToe:
     def __init__(self):
-        self.board = [' ' for _ in range(9)] # we will use a single list to rep 3x3 board
+        self.board = self.make_board()
         self.current_winner = None # keep track of winner!
+
+    @staticmethod
+    def make_board():
+        return [' ' for _ in range(9)] # we will use a single list to rep 3x3 board
 
     def print_board(self):
         #this is just getting the rows
-        for row in [self.board[i*3:(i+1)*3] for i in range(3)]:
+        for row in [self.board[i*3:(i+1) * 3] for i in range(3)]:
             print('| ' + ' | '.join(row) + ' |')
     
     @staticmethod
@@ -16,7 +22,7 @@ class TicTacToe:
         number_board = [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]
         for row in number_board:
             print('| ' + ' | '.join(row) + ' |')
-    
+     
     def available_moves(self):
         return [i for i, spot in enumerate(self.board) if spot == ' ']
         # moves = []
@@ -45,14 +51,16 @@ class TicTacToe:
     def winner(self, square, letter):
         # winner if 3 in a row anywhere.. we have to check all of these!
         # first check the row
-        row_ind = square // 3 
+        row_ind = math.floor(square / 3) 
         row = self.board[row_ind*3 : (row_ind + 1) * 3]
+        # print('row', row)
         if all([spot == letter for spot in row]):
             return True
 
         # check column
         col_ind = square % 3
         column = [self.board[col_ind+i*3] for i in range(3)]
+        # print('column', column)
         if all ([spot == letter for spot in column]):
             return True
         
@@ -81,7 +89,7 @@ def play(game, x_player, o_player, print_game=True):
     #  which breaks the loop)
     while game.empty_squares():
         # get the move from the appropriate player
-        if letter == '0':
+        if letter == 'O':
             square = o_player.get_move(game)
         else:
             square = x_player.get_move(game)
@@ -97,7 +105,6 @@ def play(game, x_player, o_player, print_game=True):
                 if print_game:
                     print(letter + ' wins!')
                 return letter 
-
             
             # after we made our move, we need to alternate letters
             letter  = 'O' if letter == 'X' else 'X'
@@ -106,13 +113,28 @@ def play(game, x_player, o_player, print_game=True):
             # else:
             #     letter = 'X'
 
-            # BUT WAIT WHAT IF WE WON??
+        # tiny pause
         if print_game:
-            print('It\'s a tie' )
+            time.sleep(0.8)
+
+    if print_game:
+        print('It\'s a tie' )
 
 if __name__ == '__main__':
-    x_player = HumanPlayer('X')
-    o_player = RandomComputerPlayer('O')
-    t = TicTacToe()
-    play(t, x_player, o_player, print_game=True)
+    x_wins = 0
+    o_wins = 0
+    ties = 0
+    for _ in range(100):
+        x_player = RandomComputerPlayer('X')
+        o_player = GeniusComputerPlayer('O')
+        t = TicTacToe()
+        result = play(t, x_player, o_player, print_game=False)
+        if result == 'X':
+            x_wins += 1
+        elif result == '0':
+            o_wins += 1
+        else:
+            ties += 1
+    
+    print(f'After 100 iterations, we see {x_wins} X wins, {o_wins} O wins, and {ties} Ties ')
 
