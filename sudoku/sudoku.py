@@ -3,7 +3,7 @@ def find_next_empty(puzzle):
     # return row, col tuple (or (None, None) if there is none)
     
     # keep in mind that we are using 0-8 for our indices
-    for r in rage(9):
+    for r in range(9):
         for c in range(9): # range(9) is 0, 1, 2, ... 8
             if puzzle[r][c] == -1:
                 return r, c
@@ -82,8 +82,10 @@ if __name__ == '__main__':
         
         [5, -1, -1,  -1, -1, -1,  -1, -1, -1],
         [6, 7, -1,  1, -1, 5,  -1, 4, -1],
-        [1, -1, 9,  -1, -1, -1,  2, -1, -1]
+        [1, -1, 9,  -1, -1, -1,  2, -1, -1],
     ]
+    
     print(solve_sudoku(example_board))
+    
     print(example_board)
 
