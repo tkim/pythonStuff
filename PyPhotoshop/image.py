@@ -41,6 +41,6 @@ class Image:
         
         self.array.resize(y, x, 3) # we muated the method in the first step of the function
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     im = Image(filename='lake.png')
     im.write_image('test.png')
