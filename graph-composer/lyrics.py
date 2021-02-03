@@ -1,4 +1,4 @@
-impoprt lyricsgenius
+import lyricsgenius
 
 # generate an api key and past it
 # https://genius.com/api-clients

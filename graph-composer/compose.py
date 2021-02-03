@@ -12,11 +12,11 @@ def get_words_from_text(text_path):
         # include the following line if you are doing song lyrics
         # text = re.sub(r'\[(.+)\]', ' ', text)
         
-        text = ' '.join(text.split())
-        text = text.lower()
-        text = text.translate(str.maketrans('', '', string.punctuation))
+        text = ' '.join(text.split()) # this is saything turn whitespace into just spaces
+        text = text.lower() # make everything lowercase to compare stuff
+        text = text.translate(str.maketrans('', '', string.punctuation)) # remove all punctuation
     
-    words = text.split()
+    words = text.split() # split on space again
     
     words = words[:1000]
     
@@ -24,7 +24,7 @@ def get_words_from_text(text_path):
 
 def make_graph(words):
     g = Graph()
-    prev_word = None
+    previous_word = None
     # for each word
     for word in words:
         # check that word is in graph, and if not then add it
@@ -32,11 +32,11 @@ def make_graph(words):
         
         # if there was a previous word, then add an edge if does not exist
         # if exists, increment weight by 1
-        if prev_word: # prev word should be a Vertex
+        if previous_word: # prev word should be a Vertex
             # check if edge exists from previous word to current word
-            prev_word.increment_edge(word_vertex)
+            previous_word.increment_edge(word_vertex)
         
-        prev_word = word_vertex
+        previous_word = word_vertex
     
     g.generate_probability_mappings()
     
