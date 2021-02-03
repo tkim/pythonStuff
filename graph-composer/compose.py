@@ -52,17 +52,28 @@ def compose(g, words, length=50):
     return composition
 
 def main():
-    words = get_words_from_text('texts/hp_sorcerer_stone.txt')
+    # step 1: get words from text
+    #words = get_words_from_text('texts/hp_sorcerer_stone.txt')
     
-    # for song in os.listdir('songs/{}.format(artist)):
-        # if song == '.DS_Store':
-        #   continue
+    # for song lyrics
+    words = []
+    for song_file in os.listdir(f'songs/{artist}'):
+        if song_file == '.DS_Store':
+            continue
+        print(song_file)
+        song_words = get_words_from_text(f'songs/{artist}/{song_file}')
+        words.extend(song_words)
+    
         # words.extend(get_words_from_text('songs/{artist}/{song}'.format(artist=artist, song=song)))
         
+    # step 2: make a graph using those words
     g = make_graph(words)
+    
+    # step 3: get the enxt word for x number of words (defined by user)
+    # step 4: show the user!
     composition = compose(g, words, 100)
     print(' '.join(composition))
     
 
 if __name__ == '__main__':
-    main()
+    print(main('taylor_swift'))
