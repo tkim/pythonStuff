@@ -12,6 +12,7 @@ end = dt.datetime.now()
 # Pandas DataReader data source options 
 # yahoo, google, fred (St. Louise Fed), famafrench (Kenneth French's data library)
 # World bank  
+# https://pandas.pydata.org/pandas-docs/version/0.18.1/remote_data.html#remote-data-fred
 
 data = web.DataReader(f"{crypto}-{currency}", "yahoo", start, end)
 
