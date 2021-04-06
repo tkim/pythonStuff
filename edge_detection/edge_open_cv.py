@@ -3,17 +3,19 @@ import numpy as np
 
 # to use a camera
 # camera = cv.VideoCapture(0) 
-camera = cv.VideoCapture('myvideo.mp4')
+camera = cv.VideoCapture('IMG_5136.mov')
 
 while True:
-    _, frame - camera.read()
+    _, frame = camera.read()
 
     cv.imshow('Camera', frame)
 
-    laplacian = cv.Laplacian(frame, cv.CV_64F)
-    laplacian = np.uint8(laplacian)
-    cv.imshow('Laplacian', laplacian)
+    # laplacian = cv.Laplacian(frame, cv.CV_64F)
+    # laplacian = np.uint8(laplacian)
+    # cv.imshow('Laplacian', laplacian)
 
+    edges = cv.Canny(frame, 100, 100)
+    cv.imshow('Canny', edges)
 
     if cv.waitKey(5) == ord('x'):
         break
