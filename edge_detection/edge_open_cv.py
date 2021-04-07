@@ -14,6 +14,7 @@ while True:
     # laplacian = np.uint8(laplacian)
     # cv.imshow('Laplacian', laplacian)
 
+    # adjust the frame
     edges = cv.Canny(frame, 100, 100)
     cv.imshow('Canny', edges)
 
