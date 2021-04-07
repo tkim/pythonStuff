@@ -1,46 +1,33 @@
+import os
 import smtplib
-from email import encoder
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart 
 
-# setup email login
+EMAIL_ADDRESS = os.environ.get('EMAIL_USER')
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASS')
 
-# incoming mail imap.gmail.com Port 993 - requires SSL
+# setup gmail for smtp
 # gmail smtp port (TLS) 587
 # SMTP port(SSL) 465
-server = smtplib.SMTP('smtp.gmail.com', 587)
 
-server.ehlo()
+with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+    smtp.ehlo()
+    # encrypt the line
+    smtp.starttls()
+    smtp.ehlo()
 
-with open('password.txt', 'r') as f:
-    password = f.read()
+    smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
 
-server.login('terrence.kim@gmail.com', password)
+    subject = 'Grab dinner this weekend?'
+    body = 'How about dinner at 6pm this saturday.'
 
-# message
-msg = MIMEMultipart()
-msg['From'] = 'Me'
-msg['To'] = 'terrence.kim@gmail.com'
-msg['Subject'] = "Just a test"
+    msg = f'Subject: {subject}\n\n{body}'
 
-with open('message.txt, 'r') as f:
-    message = f.read()
+    # smtp.sendmail(SENDER, RECIEVER, msg)
+    smtp.sendmail(EMAIL_ADDRESS, terrence.kim@gmail.com, msg)
 
-msg.attach(MIMEText(message, 'plain'))
 
-# attach jpg
-filename = 'coding.jpg'
-attachment = open(filename, 'rb')
 
-p = MIMEBase('application', 'octet-stream')
-p.set_payload(attachment.read)
 
-encoders.encode_base64(p)
 
-p.add_header('Content-Disposition', f'attachement; filename={filename}')
-msg.attach(p)
 
-# send the message
-text = msg.as_string()
-server.sendmail('terrence.kim@gmail.com', 'terrence.kim@gmail.com', text)
+
+
