@@ -1,2 +1,2 @@
 # Python Stuff
-Random Python Codes
+Useful Python Codes & Random Python Projects
