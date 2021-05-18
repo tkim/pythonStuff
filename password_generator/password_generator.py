@@ -19,8 +19,13 @@ if syms:
     all += symbols
 
 length = 17
-amount = 1
+amount = 5
+
+f = open("pw5.txt", "w+")
 
 for x in range(amount):
     password = "".join(random.sample(all, length))
-    print(password)
+    #print(password)
+    f.write("Passwords  %s\r\n" % (password))
+
+f.close()
