@@ -1,0 +1,15 @@
+This is DEBUG
+This is Info
+This is Warning
+This is DEBUG
+This is Info
+This is Warning
+2021-09-12 08:27:53,010: DEBUG - This is DEBUG
+2021-09-12 08:27:53,010: INFO - This is Info
+2021-09-12 08:27:53,010: WARNING - This is Warning
+2021-09-12 08:29:30,617: DEBUG - This is DEBUG
+2021-09-12 08:29:30,617: INFO - This is Info
+2021-09-12 08:29:30,617: WARNING - This is Warning
+2021-09-12 08:30:22,376: DEBUG - This is DEBUG
+2021-09-12 08:30:22,376: INFO - This is Info
+2021-09-12 08:30:22,376: WARNING - This is Warning
