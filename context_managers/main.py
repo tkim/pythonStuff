@@ -1,8 +1,8 @@
-f = open('test.txt', 'r')
-
+#f = open('test.txt', 'r')
+with open('test.txt', 'r') as f:
 file_contents = f.read()
 
-f.close()
+#f.close()
 
 words = file_contents.split(' ')
 word_count = len(words) 
